@@ -23,7 +23,7 @@
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Author</th>
-                                <th>Created At</th>
+                                <th>Created</th>
                                 <th>Actions</th>
                             </thead>
                             <tbody>
@@ -34,9 +34,9 @@
                                         <td>{{ $blog->user->name }}</td>
                                         <td>{{ $blog->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="" class="btn btn-success btn-sm">View</a>
-                                            <a href="" class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="" class="badge badge-success">View</a>
+                                            <a href="{{ route('blogs.edit', $blog->id) }}" class="badge badge-primary">Edit</a>
+                                            <a href="" class="badge badge-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

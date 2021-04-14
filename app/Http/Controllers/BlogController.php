@@ -33,4 +33,27 @@ class BlogController extends Controller
 
         return redirect(route('blogs.index'));
     }
+
+    public function edit(Blog $blog)
+    {
+        return view('blogs.edit')->with('blog', $blog);
+    }
+
+    public function update(Blog $blog)
+    {
+        $this->validate(request(), [
+            'title' => 'required|min:4',
+            'content' => 'required'
+        ]);
+
+        $data = request()->only(['title','content']);
+
+        $blog->update($data);
+
+        //flash message
+        session()->flash('success', 'Blog updated successfully!');
+
+        //redirect
+        return redirect(route('blogs.index'));
+    }
 }
