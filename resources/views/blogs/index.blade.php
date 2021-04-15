@@ -28,7 +28,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($blogs as $blog)
-                                    @can('view-blog', $blog)
+                                    @if (auth()->user()->isAdmin())
                                         <tr>
                                             <td>{{ $blog->title }}</td>
                                             <td>{{ $blog->content }}</td>
@@ -41,7 +41,22 @@
                                                 <a href="" class="badge badge-danger">Delete</a>
                                             </td>
                                         </tr>
-                                    @endcan
+                                    @else
+                                        @can('view-blog', $blog)
+                                            <tr>
+                                                <td>{{ $blog->title }}</td>
+                                                <td>{{ $blog->content }}</td>
+                                                <td>{{ $blog->user->name }}</td>
+                                                <td>{{ $blog->created_at->diffForHumans() }}</td>
+                                                <td>
+                                                    <a href="" class="badge badge-success">View</a>
+                                                    <a href="{{ route('blogs.edit', $blog->id) }}"
+                                                        class="badge badge-primary">Edit</a>
+                                                    <a href="" class="badge badge-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        @endcan
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

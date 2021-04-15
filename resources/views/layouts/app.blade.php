@@ -64,7 +64,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
+                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -88,19 +88,22 @@
                         <div class="col-md-2">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="{{ route('blogs.index') }}">My Blogs</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="{{ route('blogs.create') }}">Create Blog</a>
+                                    <a href="{{ route('blogs.index') }}">
+                                        @if (auth()->user()->isAdmin())
+                                            Manage Blogs
+                                        @else
+                                            My Blogs
+                                        @endif
+                                    </a>
                                 </li>
                                 @if (auth()->user()->isAdmin())
                                     <li class="list-group-item">
                                         <a href="{{ route('users.index') }}">Users</a>
                                     </li>
-                                    <li class="list-group-item">
-                                        <a href="">List of Blogs</a>
-                                    </li>
                                 @endif
+                                <li class="list-group-item">
+                                    <a href="{{ route('blogs.create') }}">Create Blog</a>
+                                </li>
                             </ul>
                         </div>
                     @endauth

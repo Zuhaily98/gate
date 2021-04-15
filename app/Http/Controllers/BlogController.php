@@ -12,6 +12,7 @@ class BlogController extends Controller
         return view('blogs.index')->with('blogs', Blog::all());
     }
 
+
     public function create()
     {
         return view('blogs.create');
