@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->enum('role', ['blogger', 'admin'])->default('blogger'); // enum takes a list of possible values into the column
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
