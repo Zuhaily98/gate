@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Blogs Posts</div>
+                    <div class="card-header">My Blogs</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -29,18 +29,20 @@
                             <tbody>
                                 @foreach ($blogs as $blog)
 
-                                    <tr>
-                                        <td>{{ $blog->title }}</td>
-                                        <td>{{ $blog->content }}</td>
-                                        <td>{{ $blog->user->name }}</td>
-                                        <td>{{ $blog->created_at->diffForHumans() }}</td>
-                                        <td>
-                                            <a href="" class="badge badge-success">View</a>
-                                            <a href="{{ route('blogs.edit', $blog->id) }}"
-                                                class="badge badge-primary">Edit</a>
-                                            <a href="" class="badge badge-danger">Delete</a>
-                                        </td>
-                                    </tr>
+                                    @can('view-blog', $blog)
+                                        <tr>
+                                            <td>{{ $blog->title }}</td>
+                                            <td>{{ $blog->content }}</td>
+                                            <td>{{ $blog->user->name }}</td>
+                                            <td>{{ $blog->created_at->diffForHumans() }}</td>
+                                            <td>
+                                                <a href="" class="badge badge-success">View</a>
+                                                <a href="{{ route('blogs.edit', $blog->id) }}"
+                                                    class="badge badge-primary">Edit</a>
+                                                <a href="" class="badge badge-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endcan
 
                                 @endforeach
                             </tbody>

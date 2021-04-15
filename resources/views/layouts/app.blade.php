@@ -88,22 +88,21 @@
                         <div class="col-md-2">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="{{ route('blogs.index') }}">
-                                        @if (auth()->user()->isAdmin())
-                                            Manage Blogs
-                                        @else
-                                            My Blogs
-                                        @endif
+                                    <a href="{{ route('blogs.myBlogs') }}">My Blog
                                     </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{{ route('blogs.index') }}">All Blogs
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{{ route('blogs.create') }}">Create Blog</a>
                                 </li>
                                 @if (auth()->user()->isAdmin())
                                     <li class="list-group-item">
                                         <a href="{{ route('users.index') }}">Users</a>
                                     </li>
                                 @endif
-                                <li class="list-group-item">
-                                    <a href="{{ route('blogs.create') }}">Create Blog</a>
-                                </li>
                             </ul>
                         </div>
                     @endauth

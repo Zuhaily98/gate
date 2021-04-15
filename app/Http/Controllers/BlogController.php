@@ -12,6 +12,11 @@ class BlogController extends Controller
         return view('blogs.index')->with('blogs', Blog::all());
     }
 
+    public function myBlogs()
+    {
+        return view('blogs.myBlogs')->with('blogs', Blog::all());
+    }
+
 
     public function create()
     {
@@ -32,7 +37,7 @@ class BlogController extends Controller
 
         session()->flash('success','Blog created successfully!');
 
-        return redirect(route('blogs.index'));
+        return redirect(route('blogs.myBlogs'));
     }
 
     public function edit(Blog $blog)
@@ -55,6 +60,6 @@ class BlogController extends Controller
         session()->flash('success', 'Blog updated successfully!');
 
         //redirect
-        return redirect(route('blogs.index'));
+        return redirect(route('blogs.myBlogs'));
     }
 }
