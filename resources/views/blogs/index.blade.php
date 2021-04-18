@@ -35,7 +35,7 @@
                                         <td>{{ $blog->user->name }}</td>
                                         <td>{{ $blog->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="" class="badge badge-success">View</a>
+                                            <a href="{{ route('blogs.show', $blog->id) }}" class="badge badge-success">View</a>
                                             @can('update', $blog)
                                                 <a href="{{ route('blogs.edit', $blog->id) }}"
                                                     class="badge badge-primary">Edit</a>
