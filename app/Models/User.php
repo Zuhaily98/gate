@@ -41,6 +41,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // 1 user can have many blogs
     public function blogs()
     {
         return $this->hasMany(Blog::class);

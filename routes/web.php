@@ -29,5 +29,9 @@ Route::get('/blogs/{blog}/edit', 'BlogController@edit')->name('blogs.edit');
 Route::post('/blogs/{blog}/update', 'BlogController@update')->name('blogs.update');
 Route::get('/blogs/{blog}', 'BlogController@show')->name('blogs.show');
 
+Route::get('/tags', 'TagController@index')->name('tags.index');
+Route::get('/tags/create', 'TagController@create')->name('tags.create');
+Route::post('/tags/create', 'TagController@store')->name('tags.store');
+
 //admin
 Route::get('/users', 'UserController@index')->name('users.index');
