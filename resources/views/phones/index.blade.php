@@ -34,7 +34,10 @@
                                     {{ $phone->number }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('phones.edit', $phone->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                    @can('update-phone', $phone)
+                                        <a href="{{ route('phones.edit', $phone->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                    @endcan
+
                                     <form action="{{ route('phones.destroy', $phone->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>

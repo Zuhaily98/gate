@@ -30,6 +30,31 @@
                             <tbody>
                                 @foreach ($blogs as $blog)
 
+                                    @if (auth()->user()->isAdmin())
+                                        @can('manage-blog', $blog)
+                                        <tr>
+                                            <td>{{ $blog->title }}</td>
+                                            <td>{{ $blog->content }}</td>
+                                            <td>{{ $blog->user->name }}</td>
+                                            <td>{{ $blog->created_at->diffForHumans() }}</td>
+                                            <td>
+                                                <a href="{{ route('blogs.show', $blog->id) }}" class="badge badge-success">View</a>
+                                                
+                                                    <a href="{{ route('blogs.edit', $blog->id) }}"
+                                                        class="badge badge-primary">Edit</a>
+                                               
+                                            </td>
+                                            <td>
+                                              
+                                                <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="badge badge-danger">Delete</button>
+                                                </form>
+                                               
+                                            </td>
+                                        </tr>
+                                        @endcan
+                                    @else
                                     <tr>
                                         <td>{{ $blog->title }}</td>
                                         <td>{{ $blog->content }}</td>
@@ -37,18 +62,21 @@
                                         <td>{{ $blog->created_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ route('blogs.show', $blog->id) }}" class="badge badge-success">View</a>
-                                            @can('update', $blog)
+                                            @can('update-blog', $blog)
                                                 <a href="{{ route('blogs.edit', $blog->id) }}"
                                                     class="badge badge-primary">Edit</a>
                                             @endcan
                                         </td>
                                         <td>
+                                            @can('delete-blog', $blog)
                                             <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="badge badge-danger">Delete</button>
                                             </form>
+                                            @endcan
                                         </td>
                                     </tr>
+                                    @endif
 
                                 @endforeach
                             </tbody>

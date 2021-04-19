@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Phone;
 use App\Http\Requests\Phones\CreatePhoneRequest;
 use App\Http\Requests\Phones\UpdatePhoneRequest;
+use Illuminate\Support\Facades\Gate;
 
 class PhoneController extends Controller
 {
@@ -38,6 +39,13 @@ class PhoneController extends Controller
 
     public function update(UpdatePhoneRequest $request, Phone $phone)
     {
+
+        if (! Gate::allows('update-phone', $phone)) {
+            if (! auth()->user()->isAdmin()) {
+                abort(403);
+            }
+        }
+
         $data = request()->only(['brand','number']);
 
         $phone->update($data);

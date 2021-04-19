@@ -101,12 +101,12 @@
                                 <li class="list-group-item">
                                     <a href="{{ route('phones.index') }}">Phone</a>
                                 </li>
-                                @if (auth()->user()->isAdmin())
+                                @can ('admin-tab')
                                     <li class="list-group-item">
                                         <a href="{{ route('users.index') }}">Users</a>
                                     </li>
-                                    
-                                @endif
+                                @endcan
+                                
                             </ul>
                         </div>
                     @endauth

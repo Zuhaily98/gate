@@ -7,6 +7,7 @@ use App\Http\Requests\Blogs\CreateBlogRequest;
 use App\Http\Requests\Blogs\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Gate;
 
 class BlogController extends Controller
 {
@@ -50,6 +51,13 @@ class BlogController extends Controller
 
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
+
+        if (! Gate::allows('update-blog', $blog)) {
+            if (! auth()->user()->isAdmin()) {
+                abort(403);
+            }
+        }
+        
         $data = request()->only(['title','content']);
 
         if ($request->tags)
