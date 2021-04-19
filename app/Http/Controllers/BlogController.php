@@ -33,6 +33,7 @@ class BlogController extends Controller
             'content' => $request->content,
         ]);
         
+        // attach() is method to use for attaching many to many data
         if($request->tags){
             $blog->tags()->attach($request->tags);
         }
@@ -44,12 +45,18 @@ class BlogController extends Controller
 
     public function edit(Blog $blog)
     {
-        return view('blogs.edit')->with('blog', $blog)->with('tag', Tag::all());
+        return view('blogs.edit')->with('blog', $blog)->with('tags', Tag::all());
     }
 
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
         $data = request()->only(['title','content']);
+
+        if ($request->tags)
+        {
+            // method for many to many relationshop to update and sync changes
+            $blog->tags()->sync($request->tags);
+        }
 
         $blog->update($data);
 

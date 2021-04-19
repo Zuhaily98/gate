@@ -22,4 +22,10 @@ class Blog extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    // Check if blog has tag
+    public function hasTag($tag_id)
+    {
+        return in_array($tag_id, $this->tags->pluck('id')->toArray());
+    }
 }
