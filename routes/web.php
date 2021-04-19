@@ -33,5 +33,9 @@ Route::get('/tags', 'TagController@index')->name('tags.index');
 Route::get('/tags/create', 'TagController@create')->name('tags.create');
 Route::post('/tags/create', 'TagController@store')->name('tags.store');
 
+Route::get('/phone', 'PhoneController@index')->name('phones.index');
+Route::get('/phone/create', 'PhoneController@create')->name('phones.create');
+Route::post('/phone/create', 'PhoneController@store')->name('phones.store');
+
 //admin
 Route::get('/users', 'UserController@index')->name('users.index');

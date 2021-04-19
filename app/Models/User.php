@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
         return $this-> role == 'admin';
     }
+
+    // one to one relationship
+    public function phone()
+    {
+        return $this->hasOne(Phone::class);
+    }
 }

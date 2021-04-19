@@ -101,10 +101,14 @@
                                 <li class="list-group-item">
                                     <a href="{{ route('tags.index') }}">Tags</a>
                                 </li>
+                                <li class="list-group-item">
+                                    <a href="{{ route('phones.index') }}">Phone</a>
+                                </li>
                                 @if (auth()->user()->isAdmin())
                                     <li class="list-group-item">
                                         <a href="{{ route('users.index') }}">Users</a>
                                     </li>
+                                    
                                 @endif
                             </ul>
                         </div>
