@@ -16,4 +16,10 @@ class Blog extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Many to Many relationship
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -21,6 +21,18 @@
                                 <textarea name="content" id="content" cols="10" rows="10" class="form-control"
                                     placeholder="Insert blog content here"></textarea>
                             </div>
+
+                            <div class="form-group">
+                                <label for="tags">Tags</label>
+                                <select name="tags[]" id="tags" class="form-control" multiple>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">
+                                            {{ $tag->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Create Post</button>
                             </div>

@@ -24,7 +24,7 @@
                         {{ $tag->name }}
                     </td>
                     <td>
-                        -
+                        {{ $tag->blogs()->count() }}
                     </td>
                     <td>
                         <a href="" class="btn btn-info btn-sm">Edit</a>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Blogs\CreateBlogRequest;
+use App\Http\Requests\Blogs\UpdateBlogRequest;
 use App\Models\Blog;
+use App\Models\Tag;
 
 class BlogController extends Controller
 {
@@ -20,20 +23,19 @@ class BlogController extends Controller
 
     public function create()
     {
-        return view('blogs.create');
+        return view('blogs.create')->with('tags', Tag::all());
     }
 
-    public function store(Request $request)
+    public function store(CreateBlogRequest $request)
     {
-        $this->validate(request(), [
-            'title' => 'required|min:4',
-            'content' => 'required'
-        ]);
-
-        auth()->user()->blogs()->create([
+        $blog = auth()->user()->blogs()->create([
             'title' => $request->title,
             'content' => $request->content,
         ]);
+        
+        if($request->tags){
+            $blog->tags()->attach($request->tags);
+        }
 
         session()->flash('success','Blog created successfully!');
 
@@ -42,16 +44,11 @@ class BlogController extends Controller
 
     public function edit(Blog $blog)
     {
-        return view('blogs.edit')->with('blog', $blog);
+        return view('blogs.edit')->with('blog', $blog)->with('tag', Tag::all());
     }
 
-    public function update(Blog $blog)
+    public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        $this->validate(request(), [
-            'title' => 'required|min:4',
-            'content' => 'required'
-        ]);
-
         $data = request()->only(['title','content']);
 
         $blog->update($data);
