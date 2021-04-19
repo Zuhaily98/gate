@@ -27,9 +27,11 @@
                         {{ $tag->blogs()->count() }}
                     </td>
                     <td>
-                        <a href="" class="btn btn-info btn-sm">Edit</a>
-                        <!-- when user click on this button, a function on javaScript will open the modal below -->
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <a href="{{ route('tags.edit', $tag->id) }}" class="btn btn-info btn-sm">Edit</a>
+                        <form action="{{ route('tags.destroy', $tag->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

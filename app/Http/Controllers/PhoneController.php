@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Phone;
 use App\Http\Requests\Phones\CreatePhoneRequest;
+use App\Http\Requests\Phones\UpdatePhoneRequest;
 
 class PhoneController extends Controller
 {
@@ -26,6 +27,33 @@ class PhoneController extends Controller
         ]);
         
         session()->flash('success','Phone created successfully!');
+
+        return redirect(route('phones.index'));
+    }
+
+    public function edit(Phone $phone)
+    {
+        return view('phones.edit')->with('phone', $phone);
+    }
+
+    public function update(UpdatePhoneRequest $request, Phone $phone)
+    {
+        $data = request()->only(['brand','number']);
+
+        $phone->update($data);
+
+        //flash message
+        session()->flash('success', 'Phone updated successfully!');
+
+        //redirect
+        return redirect(route('phones.index'));
+    }
+
+    public function destroy(Phone $phone)
+    {
+        $phone->delete();
+
+        session()->flash('success', 'Phone deleted successfully!');
 
         return redirect(route('phones.index'));
     }

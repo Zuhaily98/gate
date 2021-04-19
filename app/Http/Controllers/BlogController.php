@@ -71,4 +71,14 @@ class BlogController extends Controller
     {
         return view('blogs.show')->with('blog', $blog);
     }
+
+    public function destroy(Blog $blog)
+    {
+
+        $blog->delete();
+
+        session()->flash('success', 'Blog deleted successfully!');
+
+        return redirect(route('blogs.myBlogs'));
+    }
 }

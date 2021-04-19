@@ -25,6 +25,7 @@
                                 <th>Author</th>
                                 <th>Created</th>
                                 <th>Actions</th>
+                                <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($blogs as $blog)
@@ -36,10 +37,17 @@
                                             <td>{{ $blog->user->name }}</td>
                                             <td>{{ $blog->created_at->diffForHumans() }}</td>
                                             <td>
-                                                <a href="" class="badge badge-success">View</a>
+                                                <a href="{{ route('blogs.show', $blog->id) }}"
+                                                    class="badge badge-success">View</a>
                                                 <a href="{{ route('blogs.edit', $blog->id) }}"
                                                     class="badge badge-primary">Edit</a>
-                                                <a href="" class="badge badge-danger">Delete</a>
+                                                
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="badge badge-danger">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endcan

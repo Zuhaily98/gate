@@ -25,6 +25,7 @@
                                 <th>Author</th>
                                 <th>Created</th>
                                 <th>Actions</th>
+                                <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($blogs as $blog)
@@ -40,7 +41,12 @@
                                                 <a href="{{ route('blogs.edit', $blog->id) }}"
                                                     class="badge badge-primary">Edit</a>
                                             @endcan
-                                            <a href="" class="badge badge-danger">Delete</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="badge badge-danger">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
 

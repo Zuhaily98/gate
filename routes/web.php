@@ -28,14 +28,21 @@ Route::post('/blogs/create', 'BlogController@store')->name('blogs.store');
 Route::get('/blogs/{blog}/edit', 'BlogController@edit')->name('blogs.edit');
 Route::post('/blogs/{blog}/update', 'BlogController@update')->name('blogs.update');
 Route::get('/blogs/{blog}', 'BlogController@show')->name('blogs.show');
+Route::post('/blogs/{blog}/destroy', 'BlogController@destroy')->name('blogs.destroy');
 
 Route::get('/tags', 'TagController@index')->name('tags.index');
 Route::get('/tags/create', 'TagController@create')->name('tags.create');
 Route::post('/tags/create', 'TagController@store')->name('tags.store');
+Route::get('/tags/{tag}/edit', 'TagController@edit')->name('tags.edit');
+Route::post('/tags/{tag}/update', 'TagController@update')->name('tags.update');
+Route::post('/tags/{tag}/destroy', 'TagController@destroy')->name('tags.destroy');
 
-Route::get('/phone', 'PhoneController@index')->name('phones.index');
-Route::get('/phone/create', 'PhoneController@create')->name('phones.create');
-Route::post('/phone/create', 'PhoneController@store')->name('phones.store');
+Route::get('/phones', 'PhoneController@index')->name('phones.index');
+Route::get('/phones/create', 'PhoneController@create')->name('phones.create');
+Route::post('/phones/create', 'PhoneController@store')->name('phones.store');
+Route::get('/phones/{phone}/edit', 'PhoneController@edit')->name('phones.edit');
+Route::post('/phones/{phone}/update', 'PhoneController@update')->name('phones.update');
+Route::post('/phones/{phone}/destroy', 'PhoneController@destroy')->name('phones.destroy');
 
 //admin
 Route::get('/users', 'UserController@index')->name('users.index');
