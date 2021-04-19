@@ -52,6 +52,12 @@ class User extends Authenticatable
         return $this-> role == 'admin';
     }
 
+    public function isBlogger()
+    {
+        return $this-> role == 'blogger';
+    }
+    
+
     // one to one relationship
     public function phone()
     {
